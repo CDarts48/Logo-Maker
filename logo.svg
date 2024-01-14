@@ -1,0 +1,6 @@
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150">
+                <polygon points="75,25 25,125 125,125" style="fill:gold" />
+                <text x="75" y="100" fill="purple" text-anchor="middle">MCD</text>
+            </svg>
+        
