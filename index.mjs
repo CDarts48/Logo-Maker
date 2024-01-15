@@ -4,31 +4,34 @@ import fs from 'fs';
 import { Shape, Triangle, Circle, Square } from './lib/shape.js';
 // questions array
 const questions = [
-    {
-      type: 'list',
-      message: 'What shape do you want the svg to be?',
-      name: 'shape',
-      choices: [
-        'Triangle',
-        'Square',
-        'Circle',
-      ],
-    },
-    {
-      type: 'input',
-      message: 'What color would you like the shape to be?',
-      name: 'shapeColor',
-      validate: (input) => {
-        // I added this process.exit code to make it a bit easier to trouble shoot/UId` it allows you to write exit and exit the app
+  {
+    type: 'list',
+    message: 'What shape do you want the svg to be?',
+    name: 'shape',
+    choices: [
+      'Triangle',
+      'Square',
+      'Circle',
+    ],
+  },
+  { // <-- This opening brace was missing
+    type: 'input',
+    message: 'What color would you like the shape to be?',
+    name: 'shapeColor',
+    validate: (input) => {
         if (input.toLowerCase() === 'exit') process.exit();
         const colorRegex = /^(#([0-9a-fA-F]{3}){1,2}|[a-z]+)$/;
-        if (colorRegex.test(input)) {
-          return true;
+        const cssColorNames = [
+          'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure', 'beige', 'bisque', 'black', 'blanchedalmond', 'blue', 'blueviolet', 'brown', 'burlywood', 'cadetblue', 'chartreuse', 'chocolate', 'coral', 'cornflowerblue', 'cornsilk', 'crimson', 'cyan', 'darkblue', 'darkcyan', 'darkgoldenrod', 'darkgray', 'darkgreen', 'darkgrey', 'darkkhaki', 'darkmagenta', 'darkolivegreen', 'darkorange', 'darkorchid', 'darkred', 'darksalmon', 'darkseagreen', 'darkslateblue', 'darkslategray', 'darkslategrey', 'darkturquoise', 'darkviolet', 'deeppink', 'deepskyblue', 'dimgray', 'dimgrey', 'dodgerblue', 'firebrick', 'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro', 'ghostwhite', 'gold', 'goldenrod', 'gray', 'green', 'greenyellow', 'grey', 'honeydew', 'hotpink', 'indianred', 'indigo', 'ivory', 'khaki', 'lavender', 'lavenderblush', 'lawngreen', 'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgray', 'lightgreen', 'lightgrey', 'lightpink', 'lightsalmon', 'lightseagreen', 'lightskyblue', 'lightslategray', 'lightslategrey', 'lightsteelblue', 'lightyellow', 'lime', 'limegreen', 'linen', 'magenta', 'maroon', 'mediumaquamarine', 'mediumblue', 'mediumorchid', 'mediumpurple', 'mediumseagreen', 'mediumslateblue', 'mediumspringgreen', 'mediumturquoise', 'mediumvioletred', 'midnightblue', 'mintcream', 'mistyrose', 'moccasin', 'navajowhite', 'navy', 'oldlace', 'olive', 'olivedrab', 'orange', 'orangered', 'orchid', 'palegoldenrod', 'palegreen', 'paleturquoise', 'palevioletred', 'papayawhip', 'peachpuff', 'peru', 'pink', 'plum', 'powderblue', 'purple', 'rebeccapurple', 'red', 'rosybrown', 'royalblue', 'saddlebrown', 'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna', 'silver', 'skyblue', 'slateblue', 'slategray', 'slategrey', 'snow', 'springgreen', 'steelblue', 'tan', 'teal', 'thistle', 'tomato', 'turquoise', 'violet', 'wheat', 'white', 'whitesmoke', 'yellow', 'yellowgreen'
+      ];          
+      if (colorRegex.test(input) && (cssColorNames.includes(input.toLowerCase()) || input.startsWith('#'))) {
+            return true;
         } else {
-          return 'Please enter a valid color name or hexadecimal color code.';
+            return 'Please enter a valid color name or hexadecimal color code.';
         }
-      },
     },
+  },
+  // Rest of your code...
     {
       type: 'input',
       message: 'Please select three letters',
